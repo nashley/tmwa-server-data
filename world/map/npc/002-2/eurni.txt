@@ -9,19 +9,19 @@
     if (Zeny < 10000) goto L_NoMoney;
 
     mes "[Eurni the Surgeon]";
-    mes "\"Are you tired of being what you are?\"";
+    mes "\"Are you tired of whom you are?\"";
     next;
 
     mes "[Eurni the Surgeon]";
-    mes "\"Would you maybe be interested in a sex change?\"";
+    mes "\"Would you be interested in changing your sex?\"";
     next;
 
     mes "[Server]";
-    mes "Warning: All characters under this login will be changed. Once it's done, you will be kicked from the server. Don't panic, as everything is fine.";
+    mes "Warning: All characters under this login will be changed. Once it's done, you will be kicked from the server. Don't panic; this is normal.";
     next;
     menu
-        "Please do, my dear...", L_Change,
-        "Leave alone my family treasure!", L_Close;
+        "Please do.", L_Change,
+        "Leave my genitals alone!", L_Close;
 
 L_Change:
     if (Zeny < 10000)
@@ -37,7 +37,7 @@ L_TooYoung:
 
 L_NoMoney:
     mes "[Eurni the Surgeon]";
-    mes "\"You don't have enough to pay for my services.\"";
+    mes "\"You don't have the kind of money to pay for my services.\"";
     close;
 
 L_Close:

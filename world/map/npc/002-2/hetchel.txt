@@ -41,79 +41,80 @@
 
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
+    mes "\"Hello! I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
-        "Sorry to bother, I'm just visiting.", L_Close,
-        "I am looking for silk sheets, Lora Tay told me that I could find some in this market. Can you help?", L_main_menu;
+        "Sorry to bother you. I'm just visiting.", L_Close,
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
 
 L_WG_quest_not_done:
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello I am Hetchel, I weave fine textiles.";
-    mes "My best client is Lora Tay, at Dimond's.";
+    mes "\"Hello! I'm Hetchel, and I weave fine textiles.";
+    mes "If you ever stop by Dimond's, you should speak to my best client, Lora Tay.";
     mes "What can I do for you?\"";
     menu
-        "Sorry to bother, I'm new to this country, just visting.", L_Close,
+        "Sorry to bother you. I'm new here and just visiting.", L_Close,
         "What are you selling?", L_main_menu;
 
 L_Spants_Cry:
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
+    mes "\"Hello! I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
-        "Sorry to bother, I'm just visiting.", L_Close,
-        "I am looking for silk sheets, Lora Tay told me that I could find some in this market. Can you help?", L_Spants_Cry_Cont_1;
+        "Sorry to bother you. I'm just visiting.", L_Close,
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_Spants_Cry_Cont_1;
 
 L_Spants_Cry_2:
     mes "[Hetchel the weaver]";
     mes "";
     mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
     menu
-        "Sorry to bother, I'm just visiting.", L_Close,
-        "I am looking for silk sheets, Lora Tay told me that I could find some in this market. Can you help?", L_main_menu,
-        "Hey you have been crying so badly, can I help you somehow?", L_Spants_Reply_Cry,
-        "Give Hetchel something to dry her tears", L_Spants_Tears;
+        "Sorry to bother you. I'm new here and just visiting.", L_Close,
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "Don't cry. Is there anything I can do to help?", L_Spants_Reply_Cry,
+        "Give Hetchel something to dry her tears.", L_Spants_Tears;
 
 L_Spants_Start:
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
+    mes "\"Hello. I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
-        "Sorry to bother, I'm just visiting.", L_Close,
-        "I am looking for silk sheets, Lora Tay told me that I could find some in this market. Can you help?", L_main_menu,
-        "So you are looking for new goals in your life?", L_Spants_No_Cry;
+        "Sorry to bother you. I'm just visiting.", L_Close,
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "So you're looking for new goals in your life...?", L_Spants_No_Cry;
 
 L_Spants_Steal:
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
+    mes "\"Hello! I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
-        "Sorry to bother, I'm just visiting.", L_Close,
-        "I am looking for silk sheets, Lora Tay told me that I could find some in this market. Can you help?", L_main_menu,
-        "About the Pants...", L_Spants_Steal_Cont;
+        "Sorry to bother you. I'm just visiting.", L_Close,
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "About the pants...", L_Spants_Steal_Cont;
 
 L_Spants_Make:
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
+    mes "\"Hello! I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
-        "Sorry to bother, I'm just visiting.", L_Close,
-        "I am looking for silk sheets, Lora Tay told me that I could find some in this market. Can you help?", L_main_menu,
-        "Hey what about the Pants you were planning to make?", L_Spants_Make_Cont;
+        "Sorry to bother you. I'm just visiting.", L_Close,
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "Can you tell me about the pants you were designing?", L_Spants_Make_Cont;
 
 L_Spants_Cry_Cont_1:
-    mes "You notice how the tiny woman blushes, she suddenly bursts into tears.";
+    mes "The tiny woman blushes and then bursts into tears.";
     next;
     mes "[Hetchel the weaver]";
     mes "";
-    mes "\"Hello\"";
+    mes "\"Hello.\"";
+    emotion EMOTE_SAD;
     mes "Hetchel hides her face in her hands";
     mes "";
     mes "";
     menu
-        "\"Hey, what is the problem?\"", L_Spants_Reply_Cry,
-        "Give Hetchel something to dry her tears", L_Spants_Tears,
-        "\"Oh really? Just sell me some Silk Sheets if you have them\"", L_main_menu;
+        "\"Oh no! What's wrong?\"", L_Spants_Reply_Cry,
+        "Give Hetchel something to dry her tears.", L_Spants_Tears,
+        "\"Just sell me some Silk Sheets if you have any.\"", L_main_menu;
 
 L_Spants_Tears:
     mes "Choose the item you want to give her.";
