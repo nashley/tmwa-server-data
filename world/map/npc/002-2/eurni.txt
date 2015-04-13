@@ -9,7 +9,7 @@
     if (Zeny < 10000) goto L_NoMoney;
 
     mes "[Eurni the Surgeon]";
-    mes "\"Are you tired of whom you are?\"";
+    mes "\"Are you tired of who you are?\"";
     next;
 
     mes "[Eurni the Surgeon]";
