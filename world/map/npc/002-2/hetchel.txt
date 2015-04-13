@@ -53,7 +53,7 @@ L_WG_quest_not_done:
     mes "If you ever stop by Dimond's, you should speak to my best client, Lora Tay.";
     mes "What can I do for you?\"";
     menu
-        "Sorry to bother you. I'm new here and just visiting.", L_Close,
+        "Sorry to bother you. I'm new here and just looking around.", L_Close,
         "What are you selling?", L_main_menu;
 
 L_Spants_Cry:
@@ -70,7 +70,7 @@ L_Spants_Cry_2:
     mes "\"Hello I am Hetchel, I weave fine textiles, what can I do for you?\"";
     menu
         "Sorry to bother you. I'm new here and just visiting.", L_Close,
-        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu,
         "Don't cry. Is there anything I can do to help?", L_Spants_Reply_Cry,
         "Give Hetchel something to dry her tears.", L_Spants_Tears;
 
@@ -80,7 +80,7 @@ L_Spants_Start:
     mes "\"Hello. I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
         "Sorry to bother you. I'm just visiting.", L_Close,
-        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu,
         "So you're looking for new goals in your life...?", L_Spants_No_Cry;
 
 L_Spants_Steal:
@@ -89,7 +89,7 @@ L_Spants_Steal:
     mes "\"Hello! I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
         "Sorry to bother you. I'm just visiting.", L_Close,
-        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu,
         "About the pants...", L_Spants_Steal_Cont;
 
 L_Spants_Make:
@@ -98,7 +98,7 @@ L_Spants_Make:
     mes "\"Hello! I'm Hetchel, and I weave fine textiles. What can I do for you?\"";
     menu
         "Sorry to bother you. I'm just visiting.", L_Close,
-        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu;
+        "I'm looking for silk sheets. Lora Tay told me that I could find some here.", L_main_menu,
         "Can you tell me about the pants you were designing?", L_Spants_Make_Cont;
 
 L_Spants_Cry_Cont_1:

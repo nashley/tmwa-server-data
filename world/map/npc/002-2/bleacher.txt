@@ -11,7 +11,7 @@
     menu
         "What do I need to bleach something?", L_Materials,
         "I'd like to bleach something.", L_bleach_menu,
-        "Interesting. [Walk away]", L_Close;
+        "Interesting.", L_Close;
 
 L_Materials:
     mes "[Candide]";
@@ -19,7 +19,7 @@ L_Materials:
     next;
     menu
         "I'd like to bleach something.", L_bleach_menu,
-        "Interesting. [Walk away]", L_Close;
+        "Interesting.", L_Close;
 
 L_bleach_menu:
     if (countitem("PileOfAsh") < 3) goto L_no_ash;
