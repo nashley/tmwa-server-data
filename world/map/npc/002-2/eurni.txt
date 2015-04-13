@@ -21,7 +21,7 @@
     next;
     menu
         "Please do.", L_Change,
-        "Leave my genitals alone!", L_Close;
+        "Leave my family treasures alone!", L_Close;
 
 L_Change:
     if (Zeny < 10000)

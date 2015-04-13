@@ -3,23 +3,23 @@
 002-2,72,92,0|script|Candide|156
 {
     mes "[Candide]";
-    mes "\"Greetings! I'm Candide the Bleacher.";
-    mes "I learned the ancient art of bleaching here in Tulimshar, my homeland.\"";
+    mes "\"Greetings! I am Candide the Bleacher.";
+    mes "Tulimshar is my homeland, where I learned the ancient art of bleaching.\"";
     next;
-    mes "\"Bleaching was originally accomplished through exposure to the sun, but now we use ash and other special ingredients to remove colors from fabric.\"";
+    mes "\"Bleaching was originally done by the sun, but now we use ash combined with special ingredients to remove color from fabric.\"";
     next;
     menu
-        "What do I need to bleach something?", L_Materials,
+        "What is needed for the bleaching process?", L_Materials,
         "I'd like to bleach something.", L_bleach_menu,
-        "Interesting.", L_Close;
+        "So long.", L_Close;
 
 L_Materials:
     mes "[Candide]";
-    mes "\"For each item, I will need 3 piles of ash and 5,000 GP to cover the cost of the special ingredients.\"";
+    mes "\"For each item, I will need 3 piles of ash and 5,000 GP for the special ingredients.\"";
     next;
     menu
         "I'd like to bleach something.", L_bleach_menu,
-        "Interesting.", L_Close;
+        "So long.", L_Close;
 
 L_bleach_menu:
     if (countitem("PileOfAsh") < 3) goto L_no_ash;
@@ -85,7 +85,7 @@ L_LoopColor2:
 
 L_Nothing:
     mes "[Candide]";
-    mes "\"Come back when you have something to bleach.\"";
+    mes "\"Sorry, you have nothing to bleach.\"";
     next;
     goto L_Close;
 
@@ -112,7 +112,7 @@ L_again:
 L_no_ash:
     mes "[Candide]";
     mes "\"You don't have enough ash for me to bleach anything.";
-    mes "Remember: I need three piles.\"";
+    mes "I need three piles.\"";
     next;
     goto L_Close;
 
