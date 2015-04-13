@@ -11,8 +11,6 @@
     mes "[Eurni the Surgeon]";
     mes "\"Are you tired of who you are?\"";
     next;
-
-    mes "[Eurni the Surgeon]";
     mes "\"Would you be interested in changing your sex?\"";
     next;
 
