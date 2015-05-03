@@ -43,26 +43,6 @@ OnInit:
     end;
 }
 
-function|script|TravelerTut
-{
-    //Explain Travelers
-    if(@npcname$ == "") set @npcname$, strnpcinfo(1);
-    mes "["+@npcname$+"]";
-    mes "\"We travelers are found all over the world. Once you have found a traveler at a certain location, you can be sent back there instantly by another traveler.\"";
-    next;
-    if (TravelFound & $@tut_bit)
-        goto L_Return;
-    goto L_SetBit;
-
-L_SetBit:
-    set TravelFound, TravelFound | $@tut_bit;
-    goto L_Return;
-
-L_Return:
-    //set @npcname$, "";
-    return;
-}
-
 function|script|Traveler
 {
     if(@npcname$ == "") set @npcname$, strnpcinfo(1);
@@ -86,7 +66,15 @@ L_BitTravelSet:
     goto L_Start;
 
 L_TravelTut:
-    callfunc "TravelerTut";
+    mes "["+@npcname$+"]";
+    mes "\"We travelers are found all over the world. Once you have found a traveler at a certain location, you can be sent back there instantly by another traveler.\"";
+    next;
+    if (TravelFound & $@tut_bit)
+        goto L_Main;
+    goto L_SetBit;
+
+L_SetBit:
+    set TravelFound, TravelFound | $@tut_bit;
     goto L_Main;
 
 L_SetTravelBit:
