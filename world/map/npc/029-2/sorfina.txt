@@ -4,6 +4,7 @@
 {
     set @npc_distance, 2;
     callfunc "PCtoNPCRange";
+    if(@npc_check) end;
     goto L_Main;
 
 L_Main:
@@ -25,13 +26,43 @@ L_Start:
     mes "\"You didn't have any possessions on you when we found you and no one knows who you are.\"";
     mes "Do you have a name?";
     menu
-        strcharinfo(0), L_name;
+        strcharinfo(0), L_Name;
 
-L_name:
+L_Name:
     mes "[Old Woman]";
     mes "\"Well " + strcharinfo(0) + " what else can you tell me about yourself?.\"";
     menu
-        "Umm... I... I don't remember anything...", L_KnowNothing;
+        "I'm a woman from ...", L_Woman,
+        "I'm a man that lived in ...", L_Man,
+        "My home is in ...", L_N;
+
+L_Woman:
+    set Sex, 0;
+    goto L_Species;
+
+L_Man:
+    set Sex, 1;
+    goto L_Species;
+
+L_N:
+    set Sex, 2;
+    goto L_Species;
+
+L_Species:
+    mes "[Old Woman]";
+    mes "\"Go on. If you need to think a bit, take your time.\"";
+    menu
+        "... Tulimshar in Tonori ... I'm a Talpan.", L_Talpan;
+
+L_Talpan:
+    set Class, 1;
+    goto L_AnythingElse;
+
+L_AnythingElse:
+    mes "[Old Woman]";
+    mes "\"Anything else you can remember?\"";
+    menu
+        "Umm... no... I... I don't remember anything else...", L_KnowNothing;
 
 L_KnowNothing:
     mes "[Old Woman]";
@@ -54,6 +85,11 @@ L_Tut:
 L_Carpet:
     mes "[Sorfina]";
     mes "\"Try to take a few steps and walk to that carpet over there.";
+    next;
+    camera "#Carpet";
+    mapmask getmask() | 4;
+    next;
+    camera;
     mes "Press [###keyMoveUp;] to move up, press [###keyMoveDown;] to move down, ";
     mes "press [###keyMoveLeft;] to move left, press [###keyMoveRight;] to move right ";
     mes " or click on the place you want to go to.\"";
@@ -62,8 +98,14 @@ L_Carpet:
 
 L_Dresser:
     mes "[Sorfina]";
+    mes "\"You should get dressed now.\"";
+    next;
+    camera "Dresser#tutorial";
+    mapmask getmask() | 32;
     mes "\"In that dresser there are some clothes you can wear.\"";
     mes "\"To interact with things in your environment or talk to NPCs you can either click on it or press [###keyTargetNPC;] to focus and [###keyTalk;] to talk/activate.\"";
+    next;
+    camera;
     mes "\"Now get the clothes out of the dresser.\"";
     goto L_Close;
 
@@ -93,6 +135,7 @@ L_Clothes:
     mes "She digs in her pocket for a moment.";
     mes "\"And here is some money for you. Don't spend it all in one place.";
     mes "Now go help Tanisha downstairs.\"";
+    mapmask getmask() | 8;
     set Zeny, Zeny + 30;
     set QL_BEGIN, 4;
     goto L_Close;
@@ -126,6 +169,7 @@ L_Explain:
         "... the inventory and items?",L_Items,
         "... shortcuts?",L_Shortcut,
         "... what to do in Candor?",L_Aidan,
+        "... change my appearence?",L_Barber,
         "... nevermind.",L_Close;
 
 L_Walk:
@@ -198,6 +242,15 @@ L_Aidan:
     mes "Talk to everybody. You can never tell when they might know something useful.\"";
     goto L_Close;
 
+L_Barber:
+    mes "[Sorfina]";
+    mes "\"Jessie downstairs can change your appearance.\"";
+    mes "\"They will allow you to change your hair color or style as well as gender.\"";
+    next;
+    mes "\"There are a number of people across the continent that can change this for you.\"";
+    mes "\"There is no cost or limit to the number of times it can be changed.\"";
+    goto L_Close;
+
 L_Hasan:
     mes "[Sorfina]";
     mes "\"Make yourself at home! Do you have any questions?\"";
@@ -252,18 +305,20 @@ OnTouch:
     goto L_Start;
 }
 
-029-2,33,27,0|script|#Carpet|32767,1,1
+029-2,33,27,0|script|#Carpet|127,1,1
 {
-    end;
-
-OnTouch:
     if (QL_BEGIN != 1)
         end;
+    mapmask getmask();
     mes "[Sorfina]";
     mes "\"You should get dressed now.\"";
+    next;
+    camera "Dresser#tutorial";
+    mapmask getmask() | 16;
     mes "\"In that dresser there are some clothes you can wear.\"";
     mes "\"To interact with things in your environment or talk to NPCs you can either click on it or press N to focus and T to talk/activate.\"";
     next;
+    camera;
     mes "\"Now get the clothes out of the dresser.\"";
     set QL_BEGIN, 2;
     close;
@@ -286,6 +341,7 @@ L_Walk:
     close;
 
 L_Shirt:
+    mapmask getmask();
     mes "You take a simple Cotton Shirt and some very worn-out Ragged Shorts out of the dresser.";
     getitem "CottonShirt", 1;
     getitem "RaggedShorts", 1;
@@ -308,23 +364,19 @@ L_CloseDis:
 
 029-2,44,31,0|script|#DoorOutTut1|45,0,0
 {
-    end;
-
-OnTouch:
     if (QL_BEGIN < 4)
         goto L_Block;
+    mapmask getmask();
     warp "029-2", 112, 85;
     end;
 
 L_Block:
-    message strcharinfo(0), "Sorfina: Wait a moment! You're not ready to leave.";
+    message strcharinfo(0), "Sorfina : ##BWait a moment! ##bYou're not ready to leave.";
+    // FIXME: this should be changed to npctalk with strcharinfo(0) once we increase the view area
     end;
 }
 029-2,23,24,0|script|#GameRules1|32767,0,1
 {
-    end;
-
-OnTouch:
     if (TUT_var > 0)
         end;
     mes "[Server/Client Notice]";
@@ -335,42 +387,33 @@ OnTouch:
 }
 029-2,21,24,0|script|#GameRules2|32767,0,1
 {
-    end;
-
-OnTouch:
     if (TUT_var > 0)
         end;
-    callfunc "GameRules";
     mes "[Server/Client Notice]";
     mes "The explanations in this tutorial are based on the official client, Manaplus.";
     mes "If you're using another client, settings and controls may be different.";
+    callfunc "GameRules";
     close;
 }
 029-2,22,26,0|script|#GameRules3|32767,1,0
 {
     if (TUT_var == 0)
         goto L_KnockBack;
-    goto L_Close;
+    end;
 
 L_KnockBack:
-    message strcharinfo(0), "Please Accept the Game rules";
+    message strcharinfo(0), "Server : ##BPlease Accept the Game rules";
     warp "029-2", 22, 24;
-    goto L_Close;
-
-L_Close:
-    close;
+    end;
 }
 029-2,24,24,0|script|#GameRules4|32767,0,1
 {
     if (TUT_var == 0)
         goto L_KnockBack;
-    goto L_Close;
+    end;
 
 L_KnockBack:
-    message strcharinfo(0), "Please Accept the Game rules";
+    message strcharinfo(0), "Server : ##BPlease Accept the Game rules";
     warp "029-2", 22, 24;
-    goto L_Close;
-
-L_Close:
-    close;
+    end;
 }

@@ -26,6 +26,8 @@ OnInit:
 029-2,101,57,0|script|Morgan#_M|355
 {
     callfunc "PCtoNPCRange";
+    if(@npc_check) end;
+
     if (Int >= 5)
         goto L_Learn;
     goto L_NotMagic;
@@ -76,7 +78,7 @@ L_Start:
     mes "\"Various wands and staffs are found throughout the land with many different strengths and weaknesses.\"";
     mes "\"To use the wand you need to have it equipped and speak the incantation to let it tap into your mana.\"";
     mes "\"As the power of your magic grows so will the spells you can cast.\"";
-    mes "\"Lets start with a basic wand attack. " + getspellinvocation("wand") + "\"";
+    mes "\"Lets start with a basic wand attack. " + get(.invocation$, "spell-wand") + "\"";
     mes "\"Equip the wand and lets try out that spell.\"";
     mes "\"To cast a spell open the chat window, type the invocation and press enter.\"";
     mes "\"Speak to me again once you've cast the spell.\"";
@@ -84,7 +86,7 @@ L_Start:
 
 L_Started:
     mes "[Morgan]";
-    mes "\"Lets start with a basic wand attack. " + getspellinvocation("wand") + "\"";
+    mes "\"Lets start with a basic wand attack. " + get(.invocation$, "spell-wand") + "\"";
     mes "\"Equip the wand and lets try out that spell.\"";
     mes "\"To cast a spell open the chat window, type the invocation and press enter.\"";
     mes "\"Speak to me again once you've cast the spell.\"";
@@ -93,7 +95,7 @@ L_Started:
 L_CastOnce:
     mes "[Morgan]";
     mes "\"Ok, good job! Looks like you have good mana flow.\"";
-    mes "\"Onto the next lesson. Now that you have " + getspellinvocation("wand") + " cast,\"";
+    mes "\"Onto the next lesson. Now that you have " + get(.invocation$, "spell-wand") + " cast,\"";
     mes "\"Each time you attack the wand will convert a bit of you mana into a magic bolt.\"";
     mes "\"After so many attacks, you will need to recast the invocation to stay attuned to the wand.\"";
     mes "\"(Logging out will also cancel any spell effects currently active in-game.).\"";
@@ -104,12 +106,15 @@ L_CastOnce:
 
 L_LearningDone:
     mes "[Morgan]";
-    mes "\"" + getspellinvocation("wand") + " is a basic wand attack.\"";
+    mes "\"" + get(.invocation$, "spell-wand") + " is a basic wand attack.\"";
     mes "\"A Wand must be equipped to use the spell.\"";
     mes "\"To cast a spell open the chat window, type the invocation and press enter.\"";
+    mes "\"You can also discharge any active spell by saying " + get(.invocation$, "discharge spell") + ".\"";
     mes "\"I've taught you all I can for now. You should visit the Mana Seed north west of Hurnscald.\"";
     goto L_Close;
 
 L_Close:
     close;
 }
+
+029-2,113,59,0|shop|Zitoni|103,CactusDrink:*1,CactusPotion:*1,TinyManaElixir:*5,SmallManaElixir:*5

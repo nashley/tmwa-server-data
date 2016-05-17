@@ -5,6 +5,7 @@
 029-2,110,88,0|script|Tanisha|114
 {
     callfunc "PCtoNPCRange";
+    if(@npc_check) end;
 
     if (isin("029-2", 98, 84, 106, 89))
         goto L_Fighting;
@@ -94,6 +95,7 @@ L_Stats:
     mes "\"And it seems you became stronger and more experienced.";
     mes "That means you got some status points which you can use to increase your abilities.\"";
     mes "\"Press [###keyWindowStatus;] or click the Status button in the bar at the upper right to see your status window. There you can distribute your points on six different properties.\"";
+    mapmask getmask() | 2;
     next;
     goto L_StatsRe;
 
@@ -108,7 +110,8 @@ L_StatsRe:
     next;
     mes "\"Think about how you want to play before assigning the points.\"";
     mes "\"My Uncle sitting at the counter knows a spell to help the younglings reset their stats.\"";
-    mes "\"He also knows of mages with even more powerful reset spells.\"";
+    mes "\"He can also change your hair style and color, along with your gender.\"";
+    mes "\"Furthermore, he knows of mages with even more powerful reset spells for your stats.\"";
     next;
     if (QL_BEGIN == 7)
         goto L_Money;
@@ -210,7 +213,7 @@ L_Next2:
     goto L_Fight_Again;
 
 L_Fighting:
-    message strcharinfo(0), "Tanisha: I believe in you!";
+    npctalk strnpcinfo(0), "##3I believe in you!", strcharinfo(0);
     end;
 
 OnTimer1000:
@@ -218,7 +221,7 @@ OnTimer1000:
     if (getareausers("029-2", 98, 84, 106, 89) == 0)
         goto L_CleanUp;
     // This is needed because multiple players can be in the area at once
-    areatimer "029-2", 98, 84, 106, 89, 0, "Tanisha::OnTick";
+    areatimer 0, "029-2", 98, 84, 106, 89, 0, "Tanisha::OnTick";
     end;
 
 L_CleanUp:
@@ -237,16 +240,16 @@ OnTick:
     if (Hp > 20)
         end;
     heal MaxHp, 0;
-    message strcharinfo(0), "Tanisha: You're doing good!";
+    npctalk strnpcinfo(0), "##3You're doing good!", strcharinfo(0);
     end;
 
 OnMaggotDeath:
     if (@Maggot_Kills == 1)
-        message strcharinfo(0), "Tanisha: Aaahhhh... another one! It will crawl up your legs!";
+        npctalk strnpcinfo(0), "##3Aaahhhh... another one! It will crawl up your legs!", strcharinfo(0);
     if (@Maggot_Kills == 2)
-        message strcharinfo(0), "Tanisha: Ohh... Irrhk... Eeeeww... They just appear from nowhere!";
+        npctalk strnpcinfo(0), "##3Ohh... Irrhk... Eeeeww... They just appear from nowhere!", strcharinfo(0);
     if (@Maggot_Kills == 3)
-        message strcharinfo(0), "Tanisha: Yuck... I think I am getting sick.";
+        npctalk strnpcinfo(0), "##3Yuck... I think I am getting sick.", strcharinfo(0);
     if (isin("029-2", 98, 84, 106, 89))
         set @Maggot_Kills, @Maggot_Kills + 1;
     if (@Maggot_Kills < 5)
@@ -278,10 +281,11 @@ OnTouch:
     goto L_Block;
 
 L_Warp:
+    mapmask getmask();
     warp "029-1", 32, 100;
     end;
 
 L_Block:
-    message strcharinfo(0), "Tanisha: Please come here. I'd like some help!";
+    npctalk "Tanisha", "##3##BPlease come here. ##bI'd like some help!", strcharinfo(0);
     end;
 }

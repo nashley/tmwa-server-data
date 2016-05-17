@@ -4,8 +4,7 @@
     set MAGIC_FLAGS, MAGIC_FLAGS | MFLAG_KNOWS_OLD_WIZARD;
 
     set @run, ((QUEST_NorthTulimshar & TWOBIT_8_MASK) >> TWOBIT_8_SHIFT);
-    set @state, ((QUEST_NorthTulimshar & NIBBLE_5_MASK) >> NIBBLE_5_SHIFT);
-    if ((@run == 2) && (@state == 13))
+    if ((@run == 2) && (QL_KYLIAN == 13))
         goto L_Deliver;
     goto L_Start;
 
@@ -16,8 +15,7 @@ L_Deliver:
 L_Delivery:
     mes "[Old Wizard]";
     mes "\"Good now I can get to work on some stronger brew..\"";
-    set @state, 14;
-    callfunc "SetKylianQuest";
+    set QL_KYLIAN, 14;
     goto L_Close;
 
 L_Start:
@@ -63,7 +61,7 @@ L_NewStudent:
     next;
 
     // check if the player has the knowledge of any skill
-    if (getskilllv(SKILL_POOL))
+    if (getskilllv(SKILL_POOL) && (getskilllv(SKILL_MAGIC_ASTRAL) < 1))
         menu
             "That would be very kind of you!", L_TeachSpell,
             "Actually I am looking for someone teaching me some more magic skills.", L_AstralSoul,
@@ -77,7 +75,7 @@ L_TeachSpell:
     mes "\"This one may not seem too powerful, but it can be quite handy; it's the 'hide' spell. It will shield you from some forms of detection magic.\"";
     next;
     mes "[Old Wizard]";
-    mes "\"Put a piece of cotton cloth on your head, and speak out '" + getspellinvocation("hide") + "', loudly and clearly. The protection lasts quite long, but you may have to renew it on occasion.\"";
+    mes "\"Put a piece of cotton cloth on your head, and speak out '" + get(.invocation$, "spell-hide") + "', loudly and clearly. The protection lasts quite long, but you may have to renew it on occasion.\"";
     next;
     mes "[Old Wizard]";
     mes "\"You can also cast it on others, of course. Just speak their name after you pronounce the invocation.\"";

@@ -31,10 +31,6 @@
 
     set @has_magic, getskilllv(SKILL_MAGIC);
 
-    set @address$, "chap";
-    if (Sex == 0)
-        set @address$, "girl";
-
     if (@Q_main_status >= @Q_STATUS_POSTINTRO)
         goto L_short_intro;
 
@@ -70,8 +66,6 @@ L_intro_nopowder:
 L_intro_identity:
     mes "[Robed Man]";
     mes "He eyes you more carefully.";
-    if (Sex == 0)
-        mes "\"How odd. I could have sworn that you were a man the last time we met. Not that I mind...\"";
     mes "\"Wait. You're not Padric.\"";
     next;
     set @xmsg$, "Right... my name is " + strcharinfo(0) + ".";
@@ -242,7 +236,7 @@ L_Sul_t_s:
     mes "\"Very well, then. You have been quite helpful with my experiments, after all. As you may have noticed, the spell takes a pile of volcanic ashes. Close your hands around it, then whisper the invocation.\"";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"That invocation is '" + getspellinvocation("make-sulphur") + "'.\"";
+    mes "\"That invocation is '" + get(.invocation$, "make-sulphur") + "'.\"";
     next;
     mes "[Auldsbel the Wizard]";
     mes "\"You may find that you can transmute the powder more effectively after a while; that is perfectly natural.\"";
@@ -338,7 +332,7 @@ L_about_nature:
 
 L_about_other_spells:
     mes "[Auldsbel the Wizard]";
-    mes "\"A few spells are not claimed by any particular school of magic. In practice, this means that anyone can cast them if they just have sufficient magical power. The most prominent example is the 'detect magic' spell, '" + getspellinvocation("detect-magic") + "'.\"";
+    mes "\"A few spells are not claimed by any particular school of magic. In practice, this means that anyone can cast them if they just have sufficient magical power. The most prominent example is the 'detect magic' spell, '" + get(.invocation$, "detect-magic") + "'.\"";
     next;
     goto L_a_s_minimenu;
 
@@ -456,7 +450,7 @@ L_about_auldsbel:
     mes "\"The Council is sovereign over three hundred acres of land and nearby farming communities and has been ever since Yorick the Younger shaped Dorngard out of a mountain by sheer power of will, to build a home for the school his father had founded.\"";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"The Council has held peaceful relations with nearby realms for almost two centruries now and is widely regarded as a reliable partner in shaping civilization to allow it to evolve towards its next stage.\"";
+    mes "\"The Council has held peaceful relations with nearby realms for almost two centuries now and is widely regarded as a reliable partner in shaping civilization to allow it to evolve towards its next stage.\"";
     next;
     menu
         "All right, but what about you?.", L_about_auldsbel_2,
@@ -783,11 +777,11 @@ L_c_quest_1:
     mes "\"Good, good... I am trying to come up with a way to best use the Mauve leaves you brought me, but it seems that I will need further components. I am not sure about the exact composition yet, but I will need a few potions.\"";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"Please be a good " + @address$ + " and get me an iron potion, a concentration potion, and three small and three medium healing potions.\"";
+    mes "\"Please be a good helper and get me an iron potion, a concentration potion, and three small and three medium healing potions.\"";
     next;
     menu
         "Here you are.", L_Next4,
-        "I'm not your 'good " + @address$ + "'!", L_main_menu,
+        "I'm not your 'good helper'!", L_main_menu,
         "I'll see what I can do.", L_main_menu;
 
 L_Next4:
@@ -859,7 +853,7 @@ L_Next6:
     delitem "MaggotSlime", 25;
     set Zeny, Zeny + 5000;
     mes "[Auldsbel the Wizard]";
-    mes "\"Good " + @address$ + "!  Another 5,000 GP for you.\"";
+    mes "\"Good helper!  Another 5,000 GP for you.\"";
     mes "\"I believe that I have figured out one possible way to integrate the tincture into the spell... I will let you know how that goes.\"";
     mes "[You gain 10,000 experience points]";
     getexp 10000, 0;
@@ -990,10 +984,10 @@ L_learn_spell:
     mes "\"This spell is a simple transmutation invocation. All it takes is a clean wooden log. Hold it in your hand, focus your powers, and say the magic invocation.\"";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"You can turn the log into a wooden figurine by imagining the creature whose shape you want in your head and saying `" + getspellinvocation("transmute-wood-to-figurine") + ",' followed by the last syllable of the name of the creature you want to shape it into.\"";
+    mes "\"You can turn the log into a wooden figurine by imagining the creature whose shape you want in your head and saying `" + get(.invocation$, "spell-transmute-wood") + ",' followed by the last syllable of the name of the creature you want to shape it into.\"";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"So `" + getspellinvocation("transmute-wood-to-figurine") +  " lurk' for a Skytlurk figurine, for example. If you know what a Skytlurk is, I mean, otherwise you will have a hard time imagining it. You may want to try some others instead, though.\"";
+    mes "\"So `" + get(.invocation$, "spell-transmute-wood") +  " lurk' for a Skytlurk figurine, for example. If you know what a Skytlurk is, I mean, otherwise you will have a hard time imagining it. You may want to try some others instead, though.\"";
     next;
     mes "[Auldsbel the Wizard]";
     mes "\"Oh... and it has to be the old Tritan name. Most creatures nowadays have very different names, but some old Tritan names have survived. Just try some, until you find one that fits.\"";
@@ -1007,7 +1001,7 @@ L_learn_spell:
 
 L_repeat_spell:
     mes "[Auldsbel the Wizard]";
-    mes "\"The invocation is `" + getspellinvocation("transmute-wood-to-figurine") + ",' followed by the last syllable of the name of the creature you want to shape the log into. So `" + getspellinvocation("transmute-wood-to-figurine") + " lurk' for a Skytlurk figurine.\"";
+    mes "\"The invocation is `" + get(.invocation$, "spell-transmute-wood") + ",' followed by the last syllable of the name of the creature you want to shape the log into. So `" + get(.invocation$, "spell-transmute-wood") + " lurk' for a Skytlurk figurine.\"";
     next;
     mes "[Auldsbel the Wizard]";
     mes "\"But keep two things in mind:  First, you must KNOW what the creature looks like – so a Skytlurk probably won't work – and second, you must use the old Tritan name of it. `Fluffy' and `Scorpion' are modern names, so those won't work, you should try some others.\"";
@@ -1098,7 +1092,7 @@ L_Next9:
     mes "[1000 experience points]";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"Now, listen carefully:  to make a short tank top out of three pieces of cloth, you must use the invocation '" + getspellinvocation("make-short-tanktop") + "'.\"";
+    mes "\"Now, listen carefully:  to make a short tank top out of three pieces of cloth, you must use the invocation '" + get(.invocation$, "make-short-tanktop") + "'.\"";
     next;
     mes "[Auldsbel the Wizard]";
     mes "\"But be careful; transmutations can go wrong, and that can injure you. When you have more overall spellcasting practice, come back to me.\"";
@@ -1137,7 +1131,7 @@ L_Next10:
     mes "[1000 experience points]";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"The next spell I have will make a normal tank top out of four pieces of cloth. The invocation is '" + getspellinvocation("make-tanktop") + "', make sure to write this down.\"";
+    mes "\"The next spell I have will make a normal tank top out of four pieces of cloth. The invocation is '" + get(.invocation$, "make-tanktop") + "', make sure to write this down.\"";
     next;
     goto L_main_menu;
 
@@ -1167,7 +1161,7 @@ L_Next11:
     mes "[1000 experience points]";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"To make a shirt, use the invocation '" + getspellinvocation("make-shirt") + "'. This will require five pieces of cloth.\"";
+    mes "\"To make a shirt, use the invocation '" + get(.invocation$, "make-shirt") + "'. This will require five pieces of cloth.\"";
     next;
     goto L_main_menu;
 
@@ -1197,7 +1191,7 @@ L_Next12:
     mes "[1000 experience points]";
     next;
     mes "[Auldsbel the Wizard]";
-    mes "\"This spell makes arrows out of a single wooden log. Its invocation is '" + getspellinvocation("make-arrows") + "'.\"";
+    mes "\"This spell makes arrows out of a single wooden log. Its invocation is '" + get(.invocation$, "make-arrows") + "'.\"";
     next;
     goto L_main_menu;
 
@@ -1211,7 +1205,7 @@ L_stu_3:
 
 L_stu_3_repeat:
     mes "[Auldsbel the Wizard]";
-    mes "\"This one has the invocation `" + getspellinvocation("make-concentration-potion") + "'. Put two cobalt leaves and two pink flower petals into a bottle of water, hold it up, and speak that phrase.\"";
+    mes "\"This one has the invocation `" + get(.invocation$, "make-concentration-potion") + "'. Put two cobalt leaves and two pink flower petals into a bottle of water, hold it up, and speak that phrase.\"";
     next;
     mes "[Auldsbel the Wizard]";
     mes "\"It is a tricky spell, but if it works out, you will transform the bottle into a concentration potion.\"";

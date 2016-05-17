@@ -3,16 +3,25 @@
 029-2,98,92,0|script|Jessie|159
 {
     callfunc "PCtoNPCRange";
+    if(@npc_check) end;
+
     if (BaseLevel >= 10)
         goto L_Sorry;
 
     mes "[Jessie]";
     mes "\"I know a spell that will";
     mes "reset status points on the youngings.";
+    mes "";
+    mes "I can also change their appearance.\"";
     next;
     menu
         "Reset my stats",L_Reset,
+        "Change my appearance", L_Appearance,
         "Forget about it",L_Pass;
+
+L_Appearance:
+    callfunc "Barber";
+    goto L_Pass;
 
 L_Reset:
     resetstatus;
@@ -33,8 +42,9 @@ L_Sorry:
     mes "\"My spell only works on the very young, sorry.\"";
     next;
     mes "\"You can try Mailvox in the Tulimshar Bazaar or Wyara in the Potion Shop in Hurnscald.\"";
-    next;
-    goto L_Close;
+    menu
+        "Change my appearance", L_Appearance,
+        "Bye", L_Close;
 
 L_Close:
     close;

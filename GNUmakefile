@@ -7,15 +7,18 @@ maps:
 
 % : | %.example
 	cp "$|" "$@"
-conf: world/map/conf/magic-secrets.sex \
-login/conf/login_local.conf login/conf/ladmin_local.conf login/save/gm_account.txt login/save/account.txt \
+conf: login/conf/login_local.conf login/conf/ladmin_local.conf login/save/gm_account.txt login/save/account.txt \
 world/conf/char_local.conf \
-world/map/conf/map_local.conf world/map/conf/battle_local.conf world/map/conf/motd.txt world/map/conf/atcommand_local.conf world/map/db/const-debugflag.txt \
-conf/monitor_local.conf
+world/map/conf/map_local.conf world/map/conf/battle_local.conf world/map/conf/atcommand_local.conf world/map/db/const-debugflag.txt \
+world/map/npc/functions/motd.txt world/map/conf/permissions_local.txt
 
-world/map/conf/magic-secrets.sex: world/map/conf/magic-secrets.sex.template world/map/conf/secrets-build
-	cd world/map/conf && ./build-magic.sh
-world/map/conf/secrets-build:
+format:
+	find world/map/npc -type f -exec sed -ri \
+	-e "s%([^|]+)\|script\|([^|]+)\|-1%\1|script|\2|32767%ig" \
+	-e "s/\.gat//g" -e "s/\r\n/\n/g" -e "s/\t/    /g" \
+	-e "s%([^|]+)\|script\|([^|]+)\|([0-9]+)(,[0-9]+)?(,[0-9]+)?[^{]*\{%\1|script|\2|\3\4\5\n{%ig" \
+	-e "s%function\|script\|([^| {]+)[^{]*\{%function|script|\1\n{%ig" \
+	{} \; -exec vi -escwq {} \; -print
 
 mobxp: mobxp-impl indent-mobs
 mobxp-impl:

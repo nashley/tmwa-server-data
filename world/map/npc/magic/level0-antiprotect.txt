@@ -1,0 +1,23 @@
+-|script|antiprotect|32767
+{
+    if(call("magic_checks", 1)) end;
+    callfunc "magic_exp";
+
+    if (@antiprotect)
+        goto L_Disable;
+
+    sc_end SC_PHYS_SHIELD;
+    message strcharinfo(0), "Shield : You are now protected against betsanc until you cast detsanc again or logout.";
+    set @antiprotect, 1;
+    end;
+
+L_Disable:
+    message strcharinfo(0), "Shield : You are no longer protected against betsanc.";
+    set @antiprotect, 0;
+    end;
+
+OnInit:
+    set .invocation$, chr(MAGIC_SYMBOL) + "detsanc"; // used in npcs that refer to this spell
+    registercmd .invocation$, strnpcinfo(0);
+    end;
+}

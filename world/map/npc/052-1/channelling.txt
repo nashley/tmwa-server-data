@@ -95,9 +95,9 @@ L_SuggestChannelling:
 function|script|StartChannelling
 {
     if (isat("052-1",53,38) == 0)
-        end;
+        goto L_Return;
     if ($@illia_level_4_progress > 0)
-        end;
+        goto L_Return;
     set $@illia_level_4_progress, 1;
     set $@illia_char_channelling$, strcharinfo(0);
 
@@ -126,6 +126,9 @@ function|script|StartChannelling
 
     message strcharinfo(0), "Ok, let's stay focused now!";
     donpcevent "#Power Circle::OnCommandSt";
+    goto L_Return;
+
+L_Return:
     return;
 }
 
@@ -137,6 +140,10 @@ function|script|StartChannelling
     if (isat("052-1",53,38) == 0)
         goto L_Hint;
     end;
+
+OnCast:
+  callfunc "StartChannelling";
+  end;
 
 OnCommandSt:
     initnpctimer;
@@ -256,7 +263,7 @@ S_CheckChannelling:
         set $@illia_channelling_status_msg$, $@illia_char_channelling$ + ": Damn! It faded a little.";
 
     if ($@illia_channelling_status_msg$ != "")
-        areatimer "052-1", 1, 1, 100, 80, 0, "#Power Circle::OnMPSC";
+        areatimer 0, "052-1", 1, 1, 100, 80, 0, "#Power Circle::OnMPSC";
 
     return;
 
@@ -324,5 +331,9 @@ L_ChannellingFail:
 
 L_ShouldNotBeHere:
     heal -Hp, 0;
+    end;
+
+OnInit:
+    registercmd "#catalazuli", strnpcinfo(0)+"::OnCast";
     end;
 }

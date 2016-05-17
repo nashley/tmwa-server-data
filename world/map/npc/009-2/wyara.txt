@@ -31,10 +31,7 @@
     if (@Q_status == @STATUS_PURIFY_TWICE) goto L_M_purify_done;
 
     mes "[Wyara the witch]";
-    if (!Sex)
-        mes "\"Greetings, fair traveller! What can I do for you?\"";
-    if (Sex)
-        mes "\"Hello! What brings you here?\"";
+    mes "\"Greetings, fair traveller! What can I do for you?\"";
     next;
     set MAGIC_FLAGS, MAGIC_FLAGS | MFLAG_KNOWS_WYARA;
     goto L_Main;
@@ -165,7 +162,7 @@ L_make_manapotion:
     next;
     mes "[Wyara the Witch]";
     mes "The water in the bottle takes on a strange golden hue, but doesn't flow out.";
-    mes "After a while, she retrieves the bottle, fills some of the liquid into a smaller, clay bottle, mixes in the rest of the paste, plugs the bottle and shakes it.";
+    mes "After a while, she retrieves the bottle and pours some of the liquid into a smaller clay bottle. She proceeds to mix in the rest of the paste, then plugs the bottle and shakes it.";
     next;
     mes "[Wyara the Witch]";
     mes "\"I shall keep the rest of your water and the bottle as a payment, if you don't mind. But here is the potion; let it rest for a minute before you use it for maximum effect.\"";
@@ -245,7 +242,7 @@ L_M_spell:
 
 L_M_spell3:
     mes "[Wyara the Witch]";
-    mes "\"Now that you know the basics of nature magic, here is one of my favourites: '" + getspellinvocation("rain") + "' will summon rain, whereever you are standing. It will consume a bottle of water, though.\"";
+    mes "\"Now that you know the basics of nature magic, here is one of my favourites: '" + get(.invocation$, "rain") + "' will summon rain, whereever you are standing. It will consume a bottle of water, though.\"";
     if (getskilllv(SKILL_MAGIC) < 2)
         mes "\"You are not powerful enough to use it yet, though; you will first have to absorb more magic from the mana seed.\"";
     next;
@@ -253,14 +250,14 @@ L_M_spell3:
 
 L_M_spell2:
     mes "[Wyara the Witch]";
-    mes "\"Here is another useful one: '" + getspellinvocation("detect-players") + "'. It will tell you the names of everyone nearby, but beware that there are ways to protect against it.\"";
+    mes "\"Here is another useful one: '" + get(.invocation$, "detect-players") + "'. It will tell you the names of everyone nearby, but beware that there are ways to protect against it.\"";
     if (getskilllv(SKILL_MAGIC) < 2)
         mes "\"Hmm. You aren't powerful enough for this one either yet, I think.\"";
     next;
     if (!(getpartnerid2()))
         goto L_M_main;
     mes "[Wyara the Witch]";
-    mes "\"Married partners can find each other even more easily. Use the '" + getspellinvocation("sense-spouse") + "' spell instead.\"";
+    mes "\"Married partners can find each other even more easily. Use the '" + get(.invocation$, "sense-spouse") + "' spell instead.\"";
     next;
     goto L_M_main;
 
